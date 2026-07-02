@@ -10,7 +10,7 @@ import EmptyCompleted from "./Images/EmptyCompleted.png";
 import NoActive_ from "./Images/NoActive_.png";
 
 function App() {
-	const [todos, setTodo] = useState([]);
+	const [todos, setTodo] = useState([]) ;
 	const [text, setText] = useState();
 	const [filter, setFilter] = useState("all");
 	const [editingId, setEditingId] = useState(null);
