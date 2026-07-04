@@ -2,7 +2,7 @@ import { FiBell } from "react-icons/fi";
 
 const Navbar = () => {
 	return (
-		<nav className="sticky top-0 z-10 h-15 bg-[#0B0E12]  p-4">
+		<nav className="sticky top-0 z-10 h-17 bg-[#0B0E12]  p-4">
 			<div className="flex items-center justify-between   ">
 				
 		<div className="logo flex gap-2">
@@ -19,10 +19,10 @@ const Navbar = () => {
 				</div>
 
 				
-				<h1 className="text-2xl  font-bold bg-gradient-to-r  from-orange-200  via-purple-400  to-green-300 text-transparent bg-clip-text">Planora</h1>
+				<h1 className="text-3xl  font-bold bg-gradient-to-r  from-orange-200  via-purple-400  to-green-300 text-transparent bg-clip-text">Planora</h1>
     </div>
   
-      <FiBell  stroke="white" strokeWidth={2} className="h-8 w-5" />
+      <FiBell  stroke="white" strokeWidth={2} className="h-8 w-7	" />
 
 			</div>
 		</nav>

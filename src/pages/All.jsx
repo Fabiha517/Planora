@@ -2,7 +2,7 @@ const All = ({text,setText,todos,saveTodo,editingId}) => {
 	return (
 		<div>
 			<div class="header mb-2 ">
-				<h1 className="text-white">All TASKS</h1>
+				<h1 className="text-white text-2xl">All TASKS</h1>
 				<p className="text-[#1F2937]">
 					{
 						todos===0?"0 task":todos===1?"1 task":`${todos} tasks`

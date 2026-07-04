@@ -1,52 +1,58 @@
 @import "tailwindcss";
 @theme {
-  --breakpoint-xs: 425px;
-  --breakpoint-s:500px;
-  --breakpoint-md-lg:1000px;
-}
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #0B0E12;
+	--breakpoint-xs: 425px;
+	--breakpoint-s: 600px;
+	--breakpoint-md-lg: 1000px;
 }
 
-* {
-  box-sizing: border-box;
-}
-.TodoFilterButton{
-	display:flex ;
-  flex-direction: column;
-  align-items: center;
-  align-self: center;
-  cursor: pointer;
-  color: white;
-  
-}
-.allh:hover{
-  color:#C46B2D;
-}
-.all{
-color:#C46B2D;
-}
-.allf:focus{
-  color:#C46B2D;
-  outline: none;
-  transition: color 0.2s ease;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
 
-.active:hover{
-  color:#8759a4
+html,
+body,
+#root {
+	margin: 0;
+	height: 100%;
+	font-family: Arial, sans-serif;
+	background-color: #0b0e12;
 }
-.active:focus{
-  color: #8a40b8;
-  outline: none;
-  transition:color 0.2s ease ;
+
+.TodoFilterButton {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-self: center;
+	cursor: pointer;
+	color: white;
 }
-.completed:hover{
-  color:#83e666
+.allh:hover {
+	color: #c46b2d;
 }
-.completed:focus{
-  color: #83e666;
-  outline: none;
-  transition:color 0.2s ease ;
+.all {
+	color: #c46b2d;
+}
+.allf:focus {
+	color: #c46b2d;
+	outline: none;
+	transition: color 0.2s ease;
+}
+
+.active:hover {
+	color: #8759a4;
+}
+.active:focus {
+	color: #8a40b8;
+	outline: none;
+	transition: color 0.2s ease;
+}
+.completed:hover {
+	color: #83e666;
+}
+.completed:focus {
+	color: #83e666;
+	outline: none;
+	transition: color 0.2s ease;
 }

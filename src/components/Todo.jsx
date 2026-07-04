@@ -2,13 +2,23 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 const Todo = ({todos,toggleTodo,handleEdit,deleteTodo,showEdit,editingId}) => {
 	return (
 		<div
-			 className={`flex items-center p-2 rounded-lg w-full border px-4 py-2 gap-2 min-h-15 sm:text-[16px] text-[13px] transition-all duration-300 mb-2
+			 className={`flex items-center p-2 rounded-lg w-full border px-4 py-2 gap-2 max-h-15 sm:text-[16px] text-[13px] transition-all duration-300 mb-2
     ${
+    editingId === todos.id
+      ? "opacity-80 ring-2"
+      : ""
+  }`}
+  style={{
+    backgroundColor: todos.color.bg,
+    borderColor:
+      editingId === todos.id ? todos.color.text : "transparent",
+    boxShadow:
       editingId === todos.id
-        ? "opacity-80 ring-2 ring-[#B69CF7] border-[#B69CF7]"
-        : "border-transparent"
-    }`}
-      style={{backgroundColor:todos.color.bg}}>
+        ? `0 0 0 2px ${todos.color.text}`
+        : "none",
+  }}
+>
+
         
 
       	<input type="checkbox"
@@ -54,5 +64,5 @@ const Todo = ({todos,toggleTodo,handleEdit,deleteTodo,showEdit,editingId}) => {
 		</div>
 	);
 };
-//flex  items-center   p-2 rounded-lg w-full border  px-4 py-2 gap-2 h-15 sm:text-[16px] text-[13px]
+
 export default Todo;

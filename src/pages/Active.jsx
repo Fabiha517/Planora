@@ -2,7 +2,7 @@ const Active = ({ text, setText, activeTodos, saveTodo, editingId }) => {
 	return (
 		<div>
 			<div class="header mb-2 ">
-				<h1 className="text-white">ACTIVE TASKS</h1>
+				<h1 className="text-white text-2xl">ACTIVE TASKS</h1>
 				<p className="text-[#1F2937]">
 					{activeTodos === 0
 						? "0 task"
