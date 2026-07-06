@@ -20,10 +20,10 @@ const DashboardSidebar = ({ completedTodos, todos ,activeTodos}) => {
   else if(activeTodos===1){
     heading="🚀Final Stretch🚀"
     message="The finish line is literally one task away.🔥"
-  } else if (activeTodos <= 5) {
+  } else if (activeTodos <= 4) {
 		heading = "✨Plot Twist✨";
 		message = "Just a few checkmarks away from victory🌱";
-	} else if (activeTodos <= 8) {
+	} else if (activeTodos <= 7) {
 		heading = "😏Just Saying😏";
 		message = "Your tasks are becoming vintage👀";
 	} else {

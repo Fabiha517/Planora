@@ -1,23 +1,17 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
-import Todo from "./components/Todo";
-import Active from "./pages/Active";
-import Completed from "./pages/Completed";
-import All from "./pages/All";
+
 import TodoFilters from "./components/TodoFilters";
 import "./index.css";
-import EmptyCompleted from "./Images/EmptyCompleted.png";
-import NoActive_ from "./Images/NoActive_.png";
-import NoTask from "./Images/NoTask.png"
-import DashboardSidebar from "./components/DashboardSidebar";
 
+import DashboardSidebar from "./components/DashboardSidebar";
+import { Outlet } from "react-router-dom";
 function App() {
-	const [todos, setTodo] = useState( ()=> {
-  const saved = localStorage.getItem("todos");
-  return saved ? JSON.parse(saved) : [];
-}); ;
+	const [todos, setTodo] = useState(() => {
+		const saved = localStorage.getItem("todos");
+		return saved ? JSON.parse(saved) : [];
+	});
 	const [text, setText] = useState();
-	const [filter, setFilter] = useState("all");
 	const [editingId, setEditingId] = useState(null);
 	const [showEdit, setShowEdit] = useState(true);
 
@@ -25,8 +19,8 @@ function App() {
 	const completedTodos = todos.filter((todos) => todos.completed);
 
 	useEffect(() => {
-  localStorage.setItem("todos", JSON.stringify(todos));
-}, [todos]);
+		localStorage.setItem("todos", JSON.stringify(todos));
+	}, [todos]);
 
 	const colors = [
 		{ bg: "#FCEFE1", tag: "#FADBC5", text: "#C46B2D" },
@@ -49,24 +43,30 @@ function App() {
 	};
 
 	const toggleTodo = (id) => {
-		setTodo(todos.map((todo) =>
-			todo.id === id ? { ...todo, completing: true } : todo
-		));
+		setTodo(
+			todos.map((todo) =>
+				todo.id === id ? { ...todo, completing: true } : todo,
+			),
+		);
 		setTimeout(() => {
-			setTodo(todos.map((todo) =>
-				todo.id === id
-					? { ...todo, completed: !todo.completed, completing: false }
-					: todo
-			));
+			setTodo(
+				todos.map((todo) =>
+					todo.id === id
+						? { ...todo, completed: !todo.completed, completing: false }
+						: todo,
+				),
+			);
 		}, 700);
 	};
 
 	const saveTodo = () => {
 		if (!text?.trim()) return;
 		if (editingId !== null) {
-			setTodo(todos.map((todo) =>
-				todo.id === editingId ? { ...todo, desc: text } : todo
-			));
+			setTodo(
+				todos.map((todo) =>
+					todo.id === editingId ? { ...todo, desc: text } : todo,
+				),
+			);
 			setEditingId(null);
 		} else {
 			setTodo([
@@ -85,124 +85,36 @@ function App() {
 
 	return (
 		<div className="min-h-screen bg-[#0B0E12] flex flex-col md:flex-row">
-			{/* Filters (Sidebar on desktop, bottom on mobile) */}
-			<TodoFilters setFilter={setFilter} filter={filter} />
+			<TodoFilters />
 
-			{/* Main Content */}
 			<div className="flex-1 flex flex-col ">
 				<div className="p-5 flex-1">
 					<Navbar />
-					
+
 					<div className="max-h-[78.5vh] overflow-auto pt-4 md:max-h-[100%]">
-					{filter === "all" &&
-							(todos.length !== 0 ? (
-								<>
-									<All
-										text={text}
-										setText={setText}
-										todos={todos.length}
-										saveTodo={saveTodo}
-										editingId={editingId}
-									/>
-									{todos.map((t) => (
-										<Todo
-											key={t.id}
-											todos={t}
-											toggleTodo={toggleTodo}
-											handleEdit={handleEdit}
-											deleteTodo={deleteTodo}
-											showEdit={showEdit}
-											editingId={editingId}
-										/>
-									))}
-								</>
-							) : (
-								// Empty state remains same
-								<>
-									<All
-										todos={todos.length}
-										text={text}
-										setText={setText}
-										saveTodo={saveTodo}
-										editingId={editingId}
-									/>
-									<div className="h-full flex flex-col items-center justify-center">
-										<img src={NoTask} alt="" className="max-h-[29vh] mt-8" />
-										<p className="font-bold text-xl text-white">Ready to get organized?</p>
-										<p className="text-[#35404f]">Add your first task and let Planora keep you on track.</p>
-									</div>
-								</>
-							))}
-
-						{filter === "active" &&
-							(activeTodos.length !== 0 ? (
-								<>
-									<Active
-										text={text}
-										setText={setText}
-										activeTodos={activeTodos.length}
-										saveTodo={saveTodo}
-										editingId={editingId}
-									/>
-									{activeTodos.map((t) => (
-										<Todo
-											key={t.id}
-											todos={t}
-											toggleTodo={toggleTodo}
-											handleEdit={handleEdit}
-											deleteTodo={deleteTodo}
-											showEdit={showEdit}
-											editingId={editingId}
-										/>
-									))}
-								</>
-							) : (
-								// Empty state remains same
-								<>
-									<Active
-										activeTodos={activeTodos.length}
-										text={text}
-										setText={setText}
-										saveTodo={saveTodo}
-										editingId={editingId}
-									/>
-									<div className="h-full flex flex-col items-center justify-center">
-										<img src={NoActive_} alt="" className="max-h-[29vh] mt-8" />
-										<p className="font-bold text-xl text-white">Nothing left to do!</p>
-										<p className="text-[#35404f]">You've completed every active task.</p>
-									</div>
-								</>
-							))}
-
-						{filter === "completed" &&
-							(completedTodos.length !== 0 ? (
-								<>
-									<Completed completedTodos={completedTodos.length} />
-									{completedTodos.map((t) => (
-										<Todo 
-											key={t.id} 
-											todos={t} 
-											toggleTodo={toggleTodo} 
-											deleteTodo={deleteTodo}
-											showEdit={false} 
-											editingId={editingId} 
-										/>
-									))}
-								</>
-							) : (
-								<>
-									<Completed completedTodos={completedTodos.length} />
-									<div className="h-full flex flex-col items-center justify-center">
-										<img src={EmptyCompleted} alt="" className="h-[30vh] "/>
-										<p className="font-bold text-xl text-white">No completed tasks yet</p>
-										<p className="text-[#35404f]">Keep Going, you're doing amazing! ✨</p>
-									</div>
-								</>
-							))}
+						<Outlet
+							context={{
+								todos,
+								activeTodos,
+								completedTodos,
+								text,
+								setText,
+								saveTodo,
+								toggleTodo,
+								handleEdit,
+								deleteTodo,
+								editingId,
+								showEdit,
+							}}
+						/>
 					</div>
 				</div>
 			</div>
-			<DashboardSidebar completedTodos={completedTodos.length} todos={todos.length} activeTodos={activeTodos.length} />
+			<DashboardSidebar
+				completedTodos={completedTodos.length}
+				todos={todos.length}
+				activeTodos={activeTodos.length}
+			/>
 		</div>
 	);
 }
